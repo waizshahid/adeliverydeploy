@@ -1,0 +1,214 @@
+#box {
+  border: 2px solid #c9ffe4;
+  width: 99.6%;
+  height: 70vh;
+  background-color: #c9ffe4 !important;
+
+  bottom: 0vh;
+}
+.MuiGrid-grid-xs-1 {
+  max-width: 7.6% !important;
+}
+.MuiPaper-root .MuiCard-root .MuiPaper-elevation1 .MuiPaper-rounded {
+  margin-left:-1vh;
+  padding-left: 2vh;
+}
+.MuiGrid-root .MuiGrid-container .MuiGrid-grid-xs-6 {
+  margin-left: -.3vh;
+}
+.makeStyles-content-35 {
+  height:100% !important;
+}
+#boxSmall {
+
+  border: 2px solid #c9ffe4;
+  width: 99.6%;
+  min-height: 70vh;
+  max-height: 200vh;
+  background-color: #c9ffe4 !important;
+  position: absolute;
+  top: 150vh;
+}
+
+/* For demo */
+.ant-carousel .slick-slide {
+  text-align: center;
+  height: 160px;
+  line-height: 160px;
+  background: #364d79;
+  overflow: hidden;
+}
+
+button:focus {
+  outline: none;
+}
+
+.ant-carousel .slick-slide h3 {
+  color: #fff;
+}
+
+body {
+  overflow-x: hidden;
+}
+
+@media screen and (max-width:960px) {
+  #largeAppBar {
+    display: none;
+    visibility: hidden;
+  }
+
+  #smallNavBar {
+    display: block;
+    visibility: visible;
+    z-index: 10000000;
+  }
+
+  #boxSmall {
+    display: block;
+  }
+
+  #box {
+    display: none;
+  }
+}
+
+@media screen and (min-width: 961px) {
+  #largeAppBar {
+    display: block;
+    visibility: visible;
+  }
+
+  #smallNavBar {
+    display: none;
+    visibility: hidden;
+  }
+
+  #boxSmall {
+    display: none;
+  }
+
+  #box {
+    display: block;
+  }
+}
+
+.MuiPopover-paper {
+  width: 60vh;
+}
+.marketing-banner-clouds {
+  position: absolute;
+  display: block;
+  width: 100%;
+  transition-property: transform, -webkit-transform;
+    transition-duration: 1s, 1s;
+    transition-timing-function: cubic-bezier(0.23, 1, 0.32, 1), cubic-bezier(0.23, 1, 0.32, 1);
+    transition-delay: 0s, 0s;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: -1;
+  pointer-events: none;
+}
+.marketing-banner-cloud--top-left {
+  top: 20px;
+  transform: translate3d(0px, 0px, 0px);
+  left: 0;
+  width: 344px;
+  height: 172px;
+  margin-left: -125px;
+}
+.marketing-banner-cloud {
+  position: absolute;
+  transition-property: transform, -webkit-transform;
+    transition-duration: 1s, 1s;
+    transition-timing-function: cubic-bezier(0.23, 1, 0.32, 1), cubic-bezier(0.23, 1, 0.32, 1);
+    transition-delay: 0s, 0s;
+    overflow: hidden;
+}
+
+/* Lower left clowd */
+.marketing-banner-cloud--bottom-left-back .marketing-banner-cloud__shape {
+    width: 498px;
+    height: 197px;
+    fill:#99f6c8;
+    
+}
+.marketing-banner-cloud--bottom-left-back {
+  transform: translate3d(0px, 0px, 0px);
+  bottom: 94px;
+  left: 6px;
+  width: 498px;
+  height: 197px;
+}
+.marketing-banner-cloud {
+  position: absolute;
+  transition-property: transform, -webkit-transform;
+    transition-duration: 1s, 1s;
+    transition-timing-function: cubic-bezier(0.23, 1, 0.32, 1), cubic-bezier(0.23, 1, 0.32, 1);
+    transition-delay: 0s, 0s;
+  overflow: hidden;
+}
+/*Mid top cloud*/
+.marketing-banner-cloud--top-center {
+  top: 0;
+  left: 50%;
+  margin-left: -180px;
+  width: 569px;
+  height: 180px;
+}
+.marketing-banner-cloud {
+  position: absolute;
+  -webkit-transform: translate3d(0,0,0);
+  transform: translate3d(0,0,0);
+  -webkit-transition: -webkit-transform 1s cubic-bezier(.23,1,.32,1);
+  transition: -webkit-transform 1s cubic-bezier(.23,1,.32,1);
+  -o-transition: transform 1s cubic-bezier(.23,1,.32,1);
+  transition: transform 1s cubic-bezier(.23,1,.32,1);
+  transition: transform 1s cubic-bezier(.23,1,.32,1),-webkit-transform 1s cubic-bezier(.23,1,.32,1);
+  overflow: hidden;
+}
+.marketing-banner-cloud--top-center {
+  top: 0;
+  left: 50%;
+  margin-left: -180px;
+  width: 569px;
+  height: 180px;
+}
+/*bottom right cloud*/
+.marketing-banner-cloud--bottom-right-back .marketing-banner-cloud__shape {
+  width: 344px;
+  height: 172px;
+  fill: url(#svg-gradient-green-cloud-alt-animated);
+}
+.marketing-banner-cloud--bottom-right-back .marketing-banner-cloud__shape {
+  width: 344px;
+  height: 172px;
+  fill: url(#svg-gradient-green-cloud-alt-animated);
+}
+.marketing-banner-cloud--bottom-right-back {
+  bottom: 130px;
+  right: 0;
+  width: 344px;
+  height: 172px;
+  margin-right: -38px;
+}
+.marketing-banner-cloud {
+  position: absolute;
+  -webkit-transform: translate3d(0px,0px,0px);
+  transform: translate3d(0px,0px,0px);
+  -webkit-transition: -webkit-transform 1s cubic-bezier(.23,1,.32,1);
+  transition: -webkit-transform 1s cubic-bezier(.23,1,.32,1);
+  -o-transition: transform 1s cubic-bezier(.23,1,.32,1);
+  transition: transform 1s cubic-bezier(.23,1,.32,1);
+  transition: transform 1s cubic-bezier(.23,1,.32,1),-webkit-transform 1s cubic-bezier(.23,1,.32,1);
+  overflow: hidden;
+}
+
+.marketing-banner-cloud--bottom-right-back {
+  bottom: 130px;
+  right: 0;
+  width: 344px;
+  height: 172px;
+  margin-right: -38px;
+}
