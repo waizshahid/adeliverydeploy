@@ -1,6 +1,7 @@
 const express = require('express')
 const mongoose = require('mongoose')
 const passport = require('passport')
+const path = require('path')
 
 const app = express()
 
@@ -18,11 +19,10 @@ const users = require("./Routes/api/users")
 
 if (process.env.NODE_ENV === 'production') {
     app.use(express.static('client/build'));
-/*
-    const path = require('path');
     app.get('*', (req,res) => {
-        res.sendFile(path.resolve(__dirname, 'client', 'public', 'index.html'))
-    })*/
+        res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'))
+    })
+
 }
 
 const db = require('./config/keys').mongoURI
