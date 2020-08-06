@@ -15,6 +15,7 @@ require('./Routes/UserSignUp')(app)
 require('./Routes/UserSignUp2')(app)
 require('./Routes/UserSignUp3')(app)
 require('./Routes/addProduct')(app)
+require('./Routes/getProduct')(app)
 const users = require("./Routes/api/users")
 
 if (process.env.NODE_ENV === 'production') {
@@ -22,7 +23,6 @@ if (process.env.NODE_ENV === 'production') {
     app.get('*', (req,res) => {
         res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'))
     })
-
 }
 
 const db = require('./config/keys').mongoURI
