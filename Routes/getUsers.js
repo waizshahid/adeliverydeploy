@@ -1,5 +1,5 @@
 const mongoose = require('mongoose')
-const Users = require('../Models/User')
+const Users = require('../Models/Customer')
 
 module.exports = (app) => {
     app.get('/admin/getUsers', async (req, res) => {
