@@ -16,6 +16,7 @@ require('./Routes/UserSignUp2')(app)
 require('./Routes/UserSignUp3')(app)
 require('./Routes/addProduct')(app)
 require('./Routes/getProduct')(app)
+require('./Routes/getUsers')(app)
 const users = require("./Routes/api/users")
 
 if (process.env.NODE_ENV === 'production') {
@@ -25,7 +26,8 @@ if (process.env.NODE_ENV === 'production') {
     })
 }
 
-const db = require('./config/keys').mongoURI
+// const db = require('./config/keys').mongoURI
+const db = 'mongodb+srv://admin:admin@cluster0.7mcv9.mongodb.net/aDelivery?retryWrites=true&w=majority'
 mongoose.connect(db, {useNewUrlParser: true, useUnifiedTopology: true})
     .then( () => console.log('Mongo DB Connected Successfully'))
     .catch(err => console.log(err))
