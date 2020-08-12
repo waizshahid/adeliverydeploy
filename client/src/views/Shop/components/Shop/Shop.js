@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 import { makeStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
@@ -28,6 +29,7 @@ import StepLabel from "@material-ui/core/StepLabel";
 import StepContent from "@material-ui/core/StepContent";
 import DeleteOutlineIcon from "@material-ui/icons/DeleteOutline";
 import FiberManualRecordIcon from "@material-ui/icons/FiberManualRecord";
+import isEmpty from "../../../../common/isEmpty";
 import {
   InputBase,
   RadioGroup,
@@ -216,424 +218,424 @@ const Drinks = [
   "Extras",
 ];
 // const DrinkCognac = ["bottle 1", "bottle 2", "bottle 3", "bottle 4"];
-const SubCategory = {
-  SubCategoryLiquor1: [
-    {
-      id: "scl11",
-      img: "../../../../assets/beer.jpg",
-      text: "Liquor Subcategory1 Item 1",
-      price: "56.12",
-    },
-    {
-      id: "scl12",
-      img: "../../../../assets/beer.jpg",
-      text: "Liquor Subcategory1 Item 2",
-      price: "56.00",
-    },
-    {
-      id: "scl13",
-      img: "../../../../assets/beer.jpg",
-      text: "Liquor Subcategory1 Item 3",
-      price: "52.12",
-    },
-    {
-      id: "scl14",
-      img: "../../../../assets/beer.jpg",
-      text: "Liquor Subcategory1 Item 4",
-      price: "45.12",
-    },
-  ],
-  SubCategoryLiquor2: [
-    {
-      id: "scl21",
-      img: "../../../../assets/beer.jpg",
-      text: "Liquor Subcategory2 Item 1",
-      price: "66.12",
-    },
-    {
-      id: "scl22",
-      img: "../../../../assets/beer.jpg",
-      text: "Liquor Subcategory2 Item 2",
-      price: "58.12",
-    },
-    {
-      id: "scl23",
-      img: "../../../../assets/beer.jpg",
-      text: "Liquor Subcategory2 Item 3",
-      price: "56.22",
-    },
-    {
-      id: "scl24",
-      img: "../../../../assets/beer.jpg",
-      text: "Liquor Subcategory2 Item 4",
-      price: "56.94",
-    },
-  ],
-  SubCategoryBeer1: [
-    {
-      id: "scb11",
-      img: "../../../../assets/beer.jpg",
-      text: "Beer Subcategory1 Item 1",
-      price: "56.12",
-    },
-    {
-      id: "scb12",
-      img: "../../../../assets/beer.jpg",
-      text: "Beer Subcategory1 Item 2",
-      price: "56.00",
-    },
-    {
-      id: "scb13",
-      img: "../../../../assets/beer.jpg",
-      text: "Beer Subcategory1 Item 3",
-      price: "52.12",
-    },
-    {
-      id: "scb14",
-      img: "../../../../assets/beer.jpg",
-      text: "Beer Subcategory1 Item 4",
-      price: "45.12",
-    },
-  ],
-  SubCategoryBeer2: [
-    {
-      id: "scb21",
-      img: "../../../../assets/beer.jpg",
-      text: "Beer Subcategory2 Item 1",
-      price: "66.12",
-    },
-    {
-      id: "scb22",
-      img: "../../../../assets/beer.jpg",
-      text: "Beer Subcategory2 Item 2",
-      price: "58.12",
-    },
-    {
-      id: "scb23",
-      img: "../../../../assets/beer.jpg",
-      text: "Beer Subcategory2 Item 3",
-      price: "56.22",
-    },
-    {
-      id: "scb24",
-      img: "../../../../assets/beer.jpg",
-      text: "Beer Subcategory2 Item 4",
-      price: "56.94",
-    },
-  ],
-  SubCategoryRedWine1: [
-    {
-      id: "scr11",
-      img: "../../../../assets/beer.jpg",
-      text: "RedWine Subcategory1 Item 1",
-      price: "56.12",
-    },
-    {
-      id: "scr12",
-      img: "../../../../assets/beer.jpg",
-      text: "RedWine Subcategory1 Item 2",
-      price: "56.00",
-    },
-    {
-      id: "scr13",
-      img: "../../../../assets/beer.jpg",
-      text: "RedWine Subcategory1 Item 3",
-      price: "52.12",
-    },
-    {
-      id: "scr14",
-      img: "../../../../assets/beer.jpg",
-      text: "RedWine Subcategory1 Item 4",
-      price: "45.12",
-    },
-  ],
-  SubCategoryRedWine2: [
-    {
-      id: "scr21",
-      img: "../../../../assets/beer.jpg",
-      text: "RedWine Subcategory2 Item 1",
-      price: "66.12",
-    },
-    {
-      id: "scr22",
-      img: "../../../../assets/beer.jpg",
-      text: "RedWine Subcategory2 Item 2",
-      price: "58.12",
-    },
-    {
-      id: "scr23",
-      img: "../../../../assets/beer.jpg",
-      text: "RedWine Subcategory2 Item 3",
-      price: "56.22",
-    },
-    {
-      id: "scr24",
-      img: "../../../../assets/beer.jpg",
-      text: "RedWine Subcategory2 Item 4",
-      price: "56.94",
-    },
-  ],
-  SubCategoryCider1: [
-    {
-      id: "scc11",
-      img: "../../../../assets/beer.jpg",
-      text: "Cider Subcategory1 Item 1",
-      price: "56.12",
-    },
-    {
-      id: "scc12",
-      img: "../../../../assets/beer.jpg",
-      text: "Cider Subcategory1 Item 2",
-      price: "56.00",
-    },
-    {
-      id: "scc13",
-      img: "../../../../assets/beer.jpg",
-      text: "Cider Subcategory1 Item 3",
-      price: "52.12",
-    },
-    {
-      id: "scc14",
-      img: "../../../../assets/beer.jpg",
-      text: "Cider Subcategory1 Item 4",
-      price: "45.12",
-    },
-  ],
-  SubCategoryCider2: [
-    {
-      id: "scc21",
-      img: "../../../../assets/beer.jpg",
-      text: "Cider Subcategory2 Item 1",
-      price: "66.12",
-    },
-    {
-      id: "scc22",
-      img: "../../../../assets/beer.jpg",
-      text: "Cider Subcategory2 Item 2",
-      price: "58.12",
-    },
-    {
-      id: "scc23",
-      img: "../../../../assets/beer.jpg",
-      text: "Cider Subcategory2 Item 3",
-      price: "56.22",
-    },
-    {
-      id: "scc24",
-      img: "../../../../assets/beer.jpg",
-      text: "Cider Subcategory2 Item 4",
-      price: "56.94",
-    },
-  ],
-  SubCategoryWhiteWine1: [
-    {
-      id: "scw11",
-      img: "../../../../assets/beer.jpg",
-      text: "Wine Subcategory1 Item 1",
-      price: "56.12",
-    },
-    {
-      id: "scw12",
-      img: "../../../../assets/beer.jpg",
-      text: "Wine Subcategory1 Item 2",
-      price: "56.00",
-    },
-    {
-      id: "scw13",
-      img: "../../../../assets/beer.jpg",
-      text: "Wine Subcategory1 Item 3",
-      price: "52.12",
-    },
-    {
-      id: "scw14",
-      img: "../../../../assets/beer.jpg",
-      text: "Wine Subcategory1 Item 4",
-      price: "45.12",
-    },
-  ],
-  SubCategoryWhiteWine2: [
-    {
-      id: "scw21",
-      img: "../../../../assets/beer.jpg",
-      text: "Wine Subcategory2 Item 1",
-      price: "66.12",
-    },
-    {
-      id: "scw22",
-      img: "../../../../assets/beer.jpg",
-      text: "Wine Subcategory2 Item 2",
-      price: "58.12",
-    },
-    {
-      id: "scw23",
-      img: "../../../../assets/beer.jpg",
-      text: "Wine Subcategory2 Item 3",
-      price: "56.22",
-    },
-    {
-      id: "scw24",
-      img: "../../../../assets/beer.jpg",
-      text: "Wine Subcategory2 Item 4",
-      price: "56.94",
-    },
-  ],
-  SubCategorySparkling1: [
-    {
-      id: "scs11",
-      img: "../../../../assets/beer.jpg",
-      text: "Sparkling Subcategory1 Item 1",
-      price: "56.12",
-    },
-    {
-      id: "scs12",
-      img: "../../../../assets/beer.jpg",
-      text: "Sparkling Subcategory1 Item 2",
-      price: "56.00",
-    },
-    {
-      id: "scs13",
-      img: "../../../../assets/beer.jpg",
-      text: "Sparkling Subcategory1 Item 3",
-      price: "52.12",
-    },
-    {
-      id: "scs14",
-      img: "../../../../assets/beer.jpg",
-      text: "Sparkling Subcategory1 Item 4",
-      price: "45.12",
-    },
-  ],
-  SubCategorySparkling2: [
-    {
-      id: "scs21",
-      img: "../../../../assets/beer.jpg",
-      text: "Sparkling Subcategory2 Item 1",
-      price: "66.12",
-    },
-    {
-      id: "scs22",
-      img: "../../../../assets/beer.jpg",
-      text: "Sparkling Subcategory2 Item 2",
-      price: "58.12",
-    },
-    {
-      id: "scs23",
-      img: "../../../../assets/beer.jpg",
-      text: "Sparkling Subcategory2 Item 3",
-      price: "56.22",
-    },
-    {
-      id: "scs24",
-      img: "../../../../assets/beer.jpg",
-      text: "Sparkling Subcategory2 Item 4",
-      price: "56.94",
-    },
-  ],
-  SubCategoryPremix1: [
-    {
-      id: "scp11",
-      img: "../../../../assets/beer.jpg",
-      text: "Premix Subcategory1 Item 1",
-      price: "56.12",
-    },
-    {
-      id: "scp12",
-      img: "../../../../assets/beer.jpg",
-      text: "Premix Subcategory1 Item 2",
-      price: "56.00",
-    },
-    {
-      id: "scp13",
-      img: "../../../../assets/beer.jpg",
-      text: "Premix Subcategory1 Item 3",
-      price: "52.12",
-    },
-    {
-      id: "scp14",
-      img: "../../../../assets/beer.jpg",
-      text: "Premix Subcategory1 Item 4",
-      price: "45.12",
-    },
-  ],
-  SubCategoryPremix2: [
-    {
-      id: "scp21",
-      img: "../../../../assets/beer.jpg",
-      text: "Premix Subcategory2 Item 1",
-      price: "66.12",
-    },
-    {
-      id: "scp22",
-      img: "../../../../assets/beer.jpg",
-      text: "Premix Subcategory2 Item 2",
-      price: "58.12",
-    },
-    {
-      id: "scp23",
-      img: "../../../../assets/beer.jpg",
-      text: "Premix Subcategory2 Item 3",
-      price: "56.22",
-    },
-    {
-      id: "scp24",
-      img: "../../../../assets/beer.jpg",
-      text: "Premix Subcategory2 Item 4",
-      price: "56.94",
-    },
-  ],
-  SubCategoryExtras1: [
-    {
-      id: "sce11",
-      img: "../../../../assets/beer.jpg",
-      text: "Extra Subcategory1 Item 1",
-      price: "56.12",
-    },
-    {
-      id: "sce12",
-      img: "../../../../assets/beer.jpg",
-      text: "Extra Subcategory1 Item 2",
-      price: "56.00",
-    },
-    {
-      id: "sce13",
-      img: "../../../../assets/beer.jpg",
-      text: "Extra Subcategory1 Item 3",
-      price: "52.12",
-    },
-    {
-      id: "sce14",
-      img: "../../../../assets/beer.jpg",
-      text: "Extra Subcategory1 Item 4",
-      price: "45.12",
-    },
-  ],
-  SubCategoryExtras2: [
-    {
-      id: "sce21",
-      img: "../../../../assets/beer.jpg",
-      text: "Extra Subcategory2 Item 1",
-      price: "66.12",
-    },
-    {
-      id: "sce22",
-      img: "../../../../assets/beer.jpg",
-      text: "Extra Subcategory2 Item 2",
-      price: "58.12",
-    },
-    {
-      id: "sce23",
-      img: "../../../../assets/beer.jpg",
-      text: "Extra Subcategory2 Item 3",
-      price: "56.22",
-    },
-    {
-      id: "sce24",
-      img: "../../../../assets/beer.jpg",
-      text: "Extra Subcategory2 Item 4",
-      price: "56.94",
-    },
-  ],
-};
+// const SubCategory = {
+//   SubCategoryLiquor1: [
+//     {
+//       id: "scl11",
+//       img: "../../../../assets/beer.jpg",
+//       text: "Liquor Subcategory1 Item 1",
+//       price: "56.12",
+//     },
+//     {
+//       id: "scl12",
+//       img: "../../../../assets/beer.jpg",
+//       text: "Liquor Subcategory1 Item 2",
+//       price: "56.00",
+//     },
+//     {
+//       id: "scl13",
+//       img: "../../../../assets/beer.jpg",
+//       text: "Liquor Subcategory1 Item 3",
+//       price: "52.12",
+//     },
+//     {
+//       id: "scl14",
+//       img: "../../../../assets/beer.jpg",
+//       text: "Liquor Subcategory1 Item 4",
+//       price: "45.12",
+//     },
+//   ],
+//   SubCategoryLiquor2: [
+//     {
+//       id: "scl21",
+//       img: "../../../../assets/beer.jpg",
+//       text: "Liquor Subcategory2 Item 1",
+//       price: "66.12",
+//     },
+//     {
+//       id: "scl22",
+//       img: "../../../../assets/beer.jpg",
+//       text: "Liquor Subcategory2 Item 2",
+//       price: "58.12",
+//     },
+//     {
+//       id: "scl23",
+//       img: "../../../../assets/beer.jpg",
+//       text: "Liquor Subcategory2 Item 3",
+//       price: "56.22",
+//     },
+//     {
+//       id: "scl24",
+//       img: "../../../../assets/beer.jpg",
+//       text: "Liquor Subcategory2 Item 4",
+//       price: "56.94",
+//     },
+//   ],
+//   SubCategoryBeer1: [
+//     {
+//       id: "scb11",
+//       img: "../../../../assets/beer.jpg",
+//       text: "Beer Subcategory1 Item 1",
+//       price: "56.12",
+//     },
+//     {
+//       id: "scb12",
+//       img: "../../../../assets/beer.jpg",
+//       text: "Beer Subcategory1 Item 2",
+//       price: "56.00",
+//     },
+//     {
+//       id: "scb13",
+//       img: "../../../../assets/beer.jpg",
+//       text: "Beer Subcategory1 Item 3",
+//       price: "52.12",
+//     },
+//     {
+//       id: "scb14",
+//       img: "../../../../assets/beer.jpg",
+//       text: "Beer Subcategory1 Item 4",
+//       price: "45.12",
+//     },
+//   ],
+//   SubCategoryBeer2: [
+//     {
+//       id: "scb21",
+//       img: "../../../../assets/beer.jpg",
+//       text: "Beer Subcategory2 Item 1",
+//       price: "66.12",
+//     },
+//     {
+//       id: "scb22",
+//       img: "../../../../assets/beer.jpg",
+//       text: "Beer Subcategory2 Item 2",
+//       price: "58.12",
+//     },
+//     {
+//       id: "scb23",
+//       img: "../../../../assets/beer.jpg",
+//       text: "Beer Subcategory2 Item 3",
+//       price: "56.22",
+//     },
+//     {
+//       id: "scb24",
+//       img: "../../../../assets/beer.jpg",
+//       text: "Beer Subcategory2 Item 4",
+//       price: "56.94",
+//     },
+//   ],
+//   SubCategoryRedWine1: [
+//     {
+//       id: "scr11",
+//       img: "../../../../assets/beer.jpg",
+//       text: "RedWine Subcategory1 Item 1",
+//       price: "56.12",
+//     },
+//     {
+//       id: "scr12",
+//       img: "../../../../assets/beer.jpg",
+//       text: "RedWine Subcategory1 Item 2",
+//       price: "56.00",
+//     },
+//     {
+//       id: "scr13",
+//       img: "../../../../assets/beer.jpg",
+//       text: "RedWine Subcategory1 Item 3",
+//       price: "52.12",
+//     },
+//     {
+//       id: "scr14",
+//       img: "../../../../assets/beer.jpg",
+//       text: "RedWine Subcategory1 Item 4",
+//       price: "45.12",
+//     },
+//   ],
+//   SubCategoryRedWine2: [
+//     {
+//       id: "scr21",
+//       img: "../../../../assets/beer.jpg",
+//       text: "RedWine Subcategory2 Item 1",
+//       price: "66.12",
+//     },
+//     {
+//       id: "scr22",
+//       img: "../../../../assets/beer.jpg",
+//       text: "RedWine Subcategory2 Item 2",
+//       price: "58.12",
+//     },
+//     {
+//       id: "scr23",
+//       img: "../../../../assets/beer.jpg",
+//       text: "RedWine Subcategory2 Item 3",
+//       price: "56.22",
+//     },
+//     {
+//       id: "scr24",
+//       img: "../../../../assets/beer.jpg",
+//       text: "RedWine Subcategory2 Item 4",
+//       price: "56.94",
+//     },
+//   ],
+//   SubCategoryCider1: [
+//     {
+//       id: "scc11",
+//       img: "../../../../assets/beer.jpg",
+//       text: "Cider Subcategory1 Item 1",
+//       price: "56.12",
+//     },
+//     {
+//       id: "scc12",
+//       img: "../../../../assets/beer.jpg",
+//       text: "Cider Subcategory1 Item 2",
+//       price: "56.00",
+//     },
+//     {
+//       id: "scc13",
+//       img: "../../../../assets/beer.jpg",
+//       text: "Cider Subcategory1 Item 3",
+//       price: "52.12",
+//     },
+//     {
+//       id: "scc14",
+//       img: "../../../../assets/beer.jpg",
+//       text: "Cider Subcategory1 Item 4",
+//       price: "45.12",
+//     },
+//   ],
+//   SubCategoryCider2: [
+//     {
+//       id: "scc21",
+//       img: "../../../../assets/beer.jpg",
+//       text: "Cider Subcategory2 Item 1",
+//       price: "66.12",
+//     },
+//     {
+//       id: "scc22",
+//       img: "../../../../assets/beer.jpg",
+//       text: "Cider Subcategory2 Item 2",
+//       price: "58.12",
+//     },
+//     {
+//       id: "scc23",
+//       img: "../../../../assets/beer.jpg",
+//       text: "Cider Subcategory2 Item 3",
+//       price: "56.22",
+//     },
+//     {
+//       id: "scc24",
+//       img: "../../../../assets/beer.jpg",
+//       text: "Cider Subcategory2 Item 4",
+//       price: "56.94",
+//     },
+//   ],
+//   SubCategoryWhiteWine1: [
+//     {
+//       id: "scw11",
+//       img: "../../../../assets/beer.jpg",
+//       text: "Wine Subcategory1 Item 1",
+//       price: "56.12",
+//     },
+//     {
+//       id: "scw12",
+//       img: "../../../../assets/beer.jpg",
+//       text: "Wine Subcategory1 Item 2",
+//       price: "56.00",
+//     },
+//     {
+//       id: "scw13",
+//       img: "../../../../assets/beer.jpg",
+//       text: "Wine Subcategory1 Item 3",
+//       price: "52.12",
+//     },
+//     {
+//       id: "scw14",
+//       img: "../../../../assets/beer.jpg",
+//       text: "Wine Subcategory1 Item 4",
+//       price: "45.12",
+//     },
+//   ],
+//   SubCategoryWhiteWine2: [
+//     {
+//       id: "scw21",
+//       img: "../../../../assets/beer.jpg",
+//       text: "Wine Subcategory2 Item 1",
+//       price: "66.12",
+//     },
+//     {
+//       id: "scw22",
+//       img: "../../../../assets/beer.jpg",
+//       text: "Wine Subcategory2 Item 2",
+//       price: "58.12",
+//     },
+//     {
+//       id: "scw23",
+//       img: "../../../../assets/beer.jpg",
+//       text: "Wine Subcategory2 Item 3",
+//       price: "56.22",
+//     },
+//     {
+//       id: "scw24",
+//       img: "../../../../assets/beer.jpg",
+//       text: "Wine Subcategory2 Item 4",
+//       price: "56.94",
+//     },
+//   ],
+//   SubCategorySparkling1: [
+//     {
+//       id: "scs11",
+//       img: "../../../../assets/beer.jpg",
+//       text: "Sparkling Subcategory1 Item 1",
+//       price: "56.12",
+//     },
+//     {
+//       id: "scs12",
+//       img: "../../../../assets/beer.jpg",
+//       text: "Sparkling Subcategory1 Item 2",
+//       price: "56.00",
+//     },
+//     {
+//       id: "scs13",
+//       img: "../../../../assets/beer.jpg",
+//       text: "Sparkling Subcategory1 Item 3",
+//       price: "52.12",
+//     },
+//     {
+//       id: "scs14",
+//       img: "../../../../assets/beer.jpg",
+//       text: "Sparkling Subcategory1 Item 4",
+//       price: "45.12",
+//     },
+//   ],
+//   SubCategorySparkling2: [
+//     {
+//       id: "scs21",
+//       img: "../../../../assets/beer.jpg",
+//       text: "Sparkling Subcategory2 Item 1",
+//       price: "66.12",
+//     },
+//     {
+//       id: "scs22",
+//       img: "../../../../assets/beer.jpg",
+//       text: "Sparkling Subcategory2 Item 2",
+//       price: "58.12",
+//     },
+//     {
+//       id: "scs23",
+//       img: "../../../../assets/beer.jpg",
+//       text: "Sparkling Subcategory2 Item 3",
+//       price: "56.22",
+//     },
+//     {
+//       id: "scs24",
+//       img: "../../../../assets/beer.jpg",
+//       text: "Sparkling Subcategory2 Item 4",
+//       price: "56.94",
+//     },
+//   ],
+//   SubCategoryPremix1: [
+//     {
+//       id: "scp11",
+//       img: "../../../../assets/beer.jpg",
+//       text: "Premix Subcategory1 Item 1",
+//       price: "56.12",
+//     },
+//     {
+//       id: "scp12",
+//       img: "../../../../assets/beer.jpg",
+//       text: "Premix Subcategory1 Item 2",
+//       price: "56.00",
+//     },
+//     {
+//       id: "scp13",
+//       img: "../../../../assets/beer.jpg",
+//       text: "Premix Subcategory1 Item 3",
+//       price: "52.12",
+//     },
+//     {
+//       id: "scp14",
+//       img: "../../../../assets/beer.jpg",
+//       text: "Premix Subcategory1 Item 4",
+//       price: "45.12",
+//     },
+//   ],
+//   SubCategoryPremix2: [
+//     {
+//       id: "scp21",
+//       img: "../../../../assets/beer.jpg",
+//       text: "Premix Subcategory2 Item 1",
+//       price: "66.12",
+//     },
+//     {
+//       id: "scp22",
+//       img: "../../../../assets/beer.jpg",
+//       text: "Premix Subcategory2 Item 2",
+//       price: "58.12",
+//     },
+//     {
+//       id: "scp23",
+//       img: "../../../../assets/beer.jpg",
+//       text: "Premix Subcategory2 Item 3",
+//       price: "56.22",
+//     },
+//     {
+//       id: "scp24",
+//       img: "../../../../assets/beer.jpg",
+//       text: "Premix Subcategory2 Item 4",
+//       price: "56.94",
+//     },
+//   ],
+//   SubCategoryExtras1: [
+//     {
+//       id: "sce11",
+//       img: "../../../../assets/beer.jpg",
+//       text: "Extra Subcategory1 Item 1",
+//       price: "56.12",
+//     },
+//     {
+//       id: "sce12",
+//       img: "../../../../assets/beer.jpg",
+//       text: "Extra Subcategory1 Item 2",
+//       price: "56.00",
+//     },
+//     {
+//       id: "sce13",
+//       img: "../../../../assets/beer.jpg",
+//       text: "Extra Subcategory1 Item 3",
+//       price: "52.12",
+//     },
+//     {
+//       id: "sce14",
+//       img: "../../../../assets/beer.jpg",
+//       text: "Extra Subcategory1 Item 4",
+//       price: "45.12",
+//     },
+//   ],
+//   SubCategoryExtras2: [
+//     {
+//       id: "sce21",
+//       img: "../../../../assets/beer.jpg",
+//       text: "Extra Subcategory2 Item 1",
+//       price: "66.12",
+//     },
+//     {
+//       id: "sce22",
+//       img: "../../../../assets/beer.jpg",
+//       text: "Extra Subcategory2 Item 2",
+//       price: "58.12",
+//     },
+//     {
+//       id: "sce23",
+//       img: "../../../../assets/beer.jpg",
+//       text: "Extra Subcategory2 Item 3",
+//       price: "56.22",
+//     },
+//     {
+//       id: "sce24",
+//       img: "../../../../assets/beer.jpg",
+//       text: "Extra Subcategory2 Item 4",
+//       price: "56.94",
+//     },
+//   ],
+// };
 const DrinkBourbon = ["bottle 1", "bottle 2", "bottle 3", "bottle 4"];
 
 function handleLiquor() {
@@ -823,12 +825,63 @@ function handleExtrasPopover() {
     "background:red;color:white";
 }
 
+let uniqueCategoryNames = [];
+let uniqueSubCategoryNames = [];
+const SubCategoriesFetched = {};
+
 function Shop() {
-  const [CategoryName, setCategoryName] = useState("Category");
+  const [CategoryName, setCategoryName] = useState("Liquor");
   const [SubCategoryName, setSubCategoryName] = useState("SubCategoryLiquor1");
   const [SubCategoryName2, setSubCategoryName2] = useState(
     "SubCategoryLiquor2"
   );
+  const [SubCategory, setSubCategory] = useState([]);
+  const [iteratableCategories, setIteratableCategories] = useState([]);
+
+  useEffect(() => {
+    axios
+      .get("/getProduct")
+      .then((res) => {
+        uniqueCategoryNames = [
+          ...new Set(res.data.map((item) => item.category)),
+        ];
+        uniqueSubCategoryNames = [
+          ...new Set(res.data.map((item) => item.subCategory)),
+        ];
+        uniqueSubCategoryNames.forEach((subCategory) => {
+          let array = [];
+          res.data.forEach((fethcedProduct) => {
+            if (fethcedProduct.subCategory === subCategory) {
+              array.push(fethcedProduct);
+            }
+          });
+          SubCategoriesFetched[subCategory] = array;
+        });
+        setSubCategory(SubCategoriesFetched);
+        setIteratableCategories(() => {
+          let array = [];
+          return array;
+        });
+let array = [];
+        uniqueCategoryNames.map((uniqueCategory) => {
+          let arr = uniqueSubCategoryNames.filter((usc) => {
+            return usc.toUpperCase().indexOf(uniqueCategory.toUpperCase()) > -1
+          })
+          array.push({
+            [uniqueCategory]: arr
+          })
+        })
+        setIteratableCategories(array);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
+
+  console.log(uniqueCategoryNames);
+  console.log(iteratableCategories);
+  console.log(uniqueSubCategoryNames);
+  console.log(SubCategory);
   //Categories
   const handleLiquorName = () => {
     setCategoryName("liquor");
@@ -2026,31 +2079,29 @@ function Shop() {
                   </Card>
                 );
               })} */}
-              {SubCategory[SubCategoryName].map((cognac) => {
-                return (
-                  <Card key={cognac.id}>
-                    <CardContent align="center">
-                      <img
-                        src={require("../../../../assets/beer.jpg")}
-                        width="200"
-                      />{" "}
-                      <Typography style={{ marginTop: "3vh" }}>
-                        {cognac.text}
-                      </Typography>
-                      <Button
-                        variant="contained"
-                        style={{
-                          background: "red",
-                          color: "white",
-                          marginTop: "2vh",
-                        }}
-                      >
-                        {`$${cognac.price}`}
-                      </Button>
-                    </CardContent>
-                  </Card>
-                );
-              })}
+              {!isEmpty(SubCategory) &&
+                SubCategory[SubCategoryName].map((cognac) => {
+                  return (
+                    <Card key={cognac.id}>
+                      <CardContent align="center">
+                        <img src={cognac.imageID} width="200" />{" "}
+                        <Typography style={{ marginTop: "3vh" }}>
+                          {cognac.title}
+                        </Typography>
+                        <Button
+                          variant="contained"
+                          style={{
+                            background: "red",
+                            color: "white",
+                            marginTop: "2vh",
+                          }}
+                        >
+                          {`$${cognac.price}`}
+                        </Button>
+                      </CardContent>
+                    </Card>
+                  );
+                })}
             </Grid>
             <Grid item xs={1} />
           </Grid>
@@ -2110,32 +2161,29 @@ function Shop() {
                   </Card>
                 );
               })} */}
-              {SubCategory[SubCategoryName2].map((bourbon) => {
-                console.log(bourbon);
-                return (
-                  <Card key={bourbon.id}>
-                    <CardContent align="center">
-                      <img
-                        src={require("../../../../assets/beer.jpg")}
-                        width="200"
-                      />{" "}
-                      <Typography style={{ marginTop: "3vh" }}>
-                        {bourbon.text}
-                      </Typography>
-                      <Button
-                        variant="contained"
-                        style={{
-                          background: "red",
-                          color: "white",
-                          marginTop: "2vh",
-                        }}
-                      >
-                        {`$${bourbon.price}`}
-                      </Button>
-                    </CardContent>
-                  </Card>
-                );
-              })}
+              {!isEmpty(SubCategory) &&
+                SubCategory[SubCategoryName2].map((bourbon) => {
+                  return (
+                    <Card key={bourbon.id}>
+                      <CardContent align="center">
+                        <img src={bourbon.imageID} width="200" />{" "}
+                        <Typography style={{ marginTop: "3vh" }}>
+                          {bourbon.title}
+                        </Typography>
+                        <Button
+                          variant="contained"
+                          style={{
+                            background: "red",
+                            color: "white",
+                            marginTop: "2vh",
+                          }}
+                        >
+                          {`$${bourbon.price}`}
+                        </Button>
+                      </CardContent>
+                    </Card>
+                  );
+                })}
             </Grid>
             <Grid item xs={1} />
           </Grid>

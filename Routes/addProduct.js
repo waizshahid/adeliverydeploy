@@ -17,6 +17,7 @@ module.exports = (app) => {
         product.save((err) => {
             if (err) throw err
             console.log("product added")
+            res.send({success: true})
             console.log(product)
         })
     })

@@ -27,6 +27,7 @@ import {
   NotFound as NotFoundView,
   FormPasswordReset as FormPasswordResetView,
   AdminUserRequests as AdminUserRequestsView,
+  AdminAddProduct as AdminAddProductView,
 } from "./Admin/views";
 import {
   Dashboard as DashboardViewStore,
@@ -176,6 +177,12 @@ const Routes = () => {
             exact
             layout={MinimalLayout}
             path="/admin/Notfound"
+          />
+          <RouteWithLayout
+            component={AdminAddProductView}
+            exact
+            layout={MainLayout}
+            path="/admin/addProduct"
           />
            <RouteWithLayout
             component={DashboardViewStore}
