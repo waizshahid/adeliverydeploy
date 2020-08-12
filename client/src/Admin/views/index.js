@@ -12,5 +12,6 @@ export { default as SignUp } from "./adminSignUp";
 export { default as FormPasswordReset } from "./adminFormPasswordReset";
 export { default as AdminUserRequests } from "./AdminUserRequests";
 export { default as StoreList } from "./adminStores";
-export {default as Category} from "./Category";
-export {default as AdminAddProduct} from "./adminAddProduct";
+export { default as Category } from "./Category";
+export { default as AdminAddProduct } from "./adminAddProduct";
+export { default as AdminUsers } from "./adminUsers";
