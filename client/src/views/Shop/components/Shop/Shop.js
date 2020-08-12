@@ -862,26 +862,21 @@ function Shop() {
           let array = [];
           return array;
         });
-let array = [];
+        let array = [];
         uniqueCategoryNames.map((uniqueCategory) => {
           let arr = uniqueSubCategoryNames.filter((usc) => {
-            return usc.toUpperCase().indexOf(uniqueCategory.toUpperCase()) > -1
-          })
+            return usc.toUpperCase().indexOf(uniqueCategory.toUpperCase()) > -1;
+          });
           array.push({
-            [uniqueCategory]: arr
-          })
-        })
+            [uniqueCategory]: arr,
+          });
+        });
         setIteratableCategories(array);
       })
       .catch((err) => {
         console.log(err);
       });
   }, []);
-
-  console.log(uniqueCategoryNames);
-  console.log(iteratableCategories);
-  console.log(uniqueSubCategoryNames);
-  console.log(SubCategory);
   //Categories
   const handleLiquorName = () => {
     setCategoryName("liquor");
@@ -2082,7 +2077,7 @@ let array = [];
               {!isEmpty(SubCategory) &&
                 SubCategory[SubCategoryName].map((cognac) => {
                   return (
-                    <Card key={cognac.id}>
+                    <Card key={cognac._id}>
                       <CardContent align="center">
                         <img src={cognac.imageID} width="200" />{" "}
                         <Typography style={{ marginTop: "3vh" }}>
@@ -2164,7 +2159,7 @@ let array = [];
               {!isEmpty(SubCategory) &&
                 SubCategory[SubCategoryName2].map((bourbon) => {
                   return (
-                    <Card key={bourbon.id}>
+                    <Card key={bourbon._id}>
                       <CardContent align="center">
                         <img src={bourbon.imageID} width="200" />{" "}
                         <Typography style={{ marginTop: "3vh" }}>

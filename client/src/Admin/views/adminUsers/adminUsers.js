@@ -35,13 +35,11 @@ const AdminUsers = () => {
       .catch((err) => console.log(err));
   }, []);
 
-  console.log(state);
-
   return (
     <Grid container spacing="2" justify="center" className={classes.cards}>
       {state.map((user) => {
         return (
-          <Grid item xs={6} md={4}>
+          <Grid item xs={6} md={4} key={user._id}>
             <Card className={classes.root}>
               <CardActionArea>
                 <CardMedia
